@@ -1,0 +1,149 @@
+apply from: 'buildsystem/ci.gradle'
+apply from: 'buildsystem/dependencies.gradle'
+
+buildscript {
+  ext.kotlin_version = '1.3.41'
+  ext.gradle_tools = '3.1.3'
+  ext.build_tools = '28.0.3'
+
+  ext.compile_sdk = 28
+  ext.target_sdk = 28
+  ext.min_sdk = 21
+
+  ext.application_id = 'com.shannan.azureair'
+  ext.version_name = '1.0'
+  ext.version_code = 1
+  ext.test_runner = 'android.support.test.runner.AndroidJUnitRunner'
+
+  repositories {
+    google()
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'com.android.tools.build:gradle:3.2.1'
+    //noinspection DifferentKotlinGradleVersion
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+  }
+}
+
+allprojects {
+  repositories {
+    google()
+    jcenter()
+//    maven { url "https://jitpack.io" }
+  }
+}
+
+task clean(type: Delete) {
+  delete rootProject.buildDir
+}
+
+task runUnitTests(dependsOn: [':app:testDebugUnitTest']) {
+  description 'Run all unit tests'
+}
+
+task runAcceptanceTests(dependsOn: [':app:connectedAndroidTest']) {
+  description 'Run all acceptance tests.'
+}
+
+task deployDebug(type: Exec, dependsOn: 'app:installDebug') {
+  def rootDir = project.rootDir
+  def localProperties = new File(rootDir, "local.properties")
+  if (localProperties.exists()) {
+    Properties properties = new Properties()
+    localProperties.withInputStream {
+      inputStream -> properties.load(inputStream)
+    }
+    def sdkDir = properties.getProperty('sdk.dir')
+    def adb = "$sdkDir/platform-tools/adb"
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.shannan.azureair/com.shannan.azureair.core.navigation.RouteActivity'
+  }
+}
+
+ext {
+  //Android
+  androidBuildToolsVersion = "28.0.3"
+  androidMinSdkVersion = 15
+  androidTargetSdkVersion = 28
+  androidCompileSdkVersion = 28
+
+  //Libraries
+  daggerVersion = '2.8'
+  butterKnifeVersion = '7.0.1'
+  recyclerViewVersion = '21.0.3'
+  rxJavaVersion = '2.0.2'
+  rxAndroidVersion = '2.0.1'
+  javaxAnnotationVersion = '1.0'
+  javaxInjectVersion = '1'
+  gsonVersion = '2.3'
+  okHttpVersion = '2.5.0'
+  androidAnnotationsVersion = '21.0.3'
+  arrowVersion = '1.0.0'
+
+  //Testing
+  robolectricVersion = '3.1.1'
+  jUnitVersion = '4.12'
+  assertJVersion = '1.7.1'
+  mockitoVersion = '1.9.5'
+  dexmakerVersion = '1.0'
+  espressoVersion = '2.0'
+  testingSupportLibVersion = '0.1'
+
+  //Development
+  leakCanaryVersion = '1.3.1'
+
+  presentationDependencies = [
+          daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+          dagger:             "com.google.dagger:dagger:${daggerVersion}",
+          butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
+          recyclerView:       "com.android.support:recyclerview-v7:${recyclerViewVersion}",
+          rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+          rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+          javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}"
+  ]
+
+  presentationTestDependencies = [
+          mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+          dexmaker:           "com.google.dexmaker:dexmaker:${dexmakerVersion}",
+          dexmakerMockito:    "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+          espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+          testingSupportLib:  "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
+  ]
+
+  domainDependencies = [
+          javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+          javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
+          rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+          arrow:              "com.fernandocejas:arrow:${arrowVersion}"
+  ]
+
+  domainTestDependencies = [
+          junit:              "junit:junit:${jUnitVersion}",
+          mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+          assertj:            "org.assertj:assertj-core:${assertJVersion}"
+  ]
+
+  dataDependencies = [
+          daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+          dagger:             "com.google.dagger:dagger:${daggerVersion}",
+          okHttp:             "com.squareup.okhttp:okhttp:${okHttpVersion}",
+          gson:               "com.google.code.gson:gson:${gsonVersion}",
+          rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+          rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+          javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+          javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
+          androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}"
+  ]
+
+  dataTestDependencies = [
+          junit:              "junit:junit:${jUnitVersion}",
+          assertj:            "org.assertj:assertj-core:${assertJVersion}",
+          mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+          robolectric:        "org.robolectric:robolectric:${robolectricVersion}",
+  ]
+
+  developmentDependencies = [
+          leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+  ]
+}
