@@ -10,7 +10,10 @@ import javax.inject.Inject
 class GetCachedUserUseCase
 @Inject constructor(private val cache: UserCache) : UseCase<User, GetCachedUserUseCase.Params>() {
 
-    override suspend fun run(params: Params): Either<Failure, User> = cache.getUser()
+    override suspend fun run(params: Params): Either<Failure, User> {
+        val currentTime = System.currentTimeMillis()
+        return cache.getUser(currentTime)
+    }
 
     data class Params(val none: None)
 }

@@ -2,9 +2,9 @@ package com.shannan.azureair.domain.interactor.models
 
 import com.shannan.azureair.domain.extension.empty
 
-data class User(var email: String, var name: String, var phone: String?, var token: String?) {
+data class User(val id: Long, val access_token: String, val token_type: String, val expires_in: Long, var expiresAt: Long) {
 
     companion object {
-        fun empty() = User(String.empty(), String.empty(), null, null)
+        fun empty() = User(Long.MAX_VALUE, String.empty(), String.empty(), Long.MAX_VALUE, Long.MAX_VALUE)
     }
 }

@@ -12,5 +12,5 @@ class SearchAirportsUseCase
 
     override suspend fun run(params: Params): Either<Failure, List<Airport>> = airportsRepository.searchAirports(params.token, params.query)
 
-    data class Params(val token: String, val query: String?)
+    data class Params(val token: String, val query: String)
 }
