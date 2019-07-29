@@ -1,4 +1,4 @@
-package com.shannan.azureair.data
+package com.shannan.azureair.data.utils
 
 import android.content.Context
 import com.shannan.azureair.data.extension.networkInfo

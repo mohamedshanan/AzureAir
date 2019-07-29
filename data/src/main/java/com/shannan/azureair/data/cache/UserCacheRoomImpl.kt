@@ -1,6 +1,6 @@
 package com.shannan.azureair.data.cache
 
-import com.shannan.azureair.data.Entity.UserEntity
+import com.shannan.azureair.data.entity.UserEntity
 import com.shannan.azureair.data.roomdb.UserDao
 import com.shannan.azureair.domain.exception.Failure
 import com.shannan.azureair.domain.functional.Either

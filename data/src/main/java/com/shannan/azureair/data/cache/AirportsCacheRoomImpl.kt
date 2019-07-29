@@ -5,7 +5,7 @@ import com.shannan.azureair.domain.exception.Failure
 import com.shannan.azureair.domain.functional.Either
 import com.shannan.azureair.domain.repository.AirportsRepository
 import javax.inject.Inject
-import com.shannan.azureair.data.Entity.Airport as AirportEntity
+import com.shannan.azureair.data.entity.Airport as AirportEntity
 import com.shannan.azureair.domain.interactor.models.Airport as DomainAirport
 
 class AirportsCacheRoomImpl

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.shannan.azureair.data.Entity.UserEntity
+import com.shannan.azureair.data.entity.UserEntity
 
 @Dao
 interface UserDao {

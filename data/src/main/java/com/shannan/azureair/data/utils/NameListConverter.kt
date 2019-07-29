@@ -1,9 +1,9 @@
-package com.shannan.azureair.data
+package com.shannan.azureair.data.utils
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.shannan.azureair.data.Entity.Name
+import com.shannan.azureair.data.entity.Name
 
 class NameListConverter {
 

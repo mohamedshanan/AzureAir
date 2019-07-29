@@ -1,11 +1,11 @@
-package com.shannan.azureair.data.Entity
+package com.shannan.azureair.data.entity
 
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
-import com.shannan.azureair.data.NameListConverter
+import com.shannan.azureair.data.utils.NameListConverter
 import com.shannan.azureair.domain.interactor.models.Airport as DomainAirport
 import com.shannan.azureair.domain.interactor.models.Coordinate as DomainCoordinate
 import com.shannan.azureair.domain.interactor.models.Name as DomainName
