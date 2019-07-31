@@ -1,22 +1,14 @@
-package com.shannan.azureair.data.remote
+package com.shannan.azureair.data.remote.airports
 
 import com.shannan.azureair.data.entity.AirportsResponse
 import com.shannan.azureair.data.entity.FlightsResponse
-import com.shannan.azureair.data.entity.UserEntity
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Path
+import retrofit2.http.Query
 
-internal interface LufthansaApi {
-
-    /**
-     * Get access token
-     */
-    @FormUrlEncoded
-    @POST(GET_ACCESS_TOKEN)
-    fun authenticate(@Field(PARAM_CLIENT_ID) clientId: String,
-                     @Field(PARAM_CLIENT_SECRET) clientSecret: String,
-                     @Field(PARAM_GRANT_TYPE) grantType: String):
-            Call<UserEntity>
+internal interface LufthansaAirportsApi {
 
     /**
      * Get a list of airports
@@ -41,17 +33,12 @@ internal interface LufthansaApi {
             Call<FlightsResponse>
 
     companion object {
-        const val LH_GRANT_TYPE: String = "client_credentials"
         const val BEARER: String = "Bearer "
         const val DEFAULT_LANG: String = "en"
 
-        const val GET_ACCESS_TOKEN = "oauth/token"
         const val GET_AIRPORTS = "references/airports"
         const val GET_SCHEDULES = "operations/schedules/{origin}/{destination}/{fromDateTime}"
         const val AUTHORIZATION_HEADER: String = "Authorization"
-        const val PARAM_CLIENT_ID = "client_id"
-        const val PARAM_CLIENT_SECRET = "client_secret"
-        const val PARAM_GRANT_TYPE = "grant_type"
         const val PARAM_OFFSET = "offset"
         const val PARAM_LIMIT = "limit"
         const val PARAM_LANG = "lang"

@@ -5,7 +5,11 @@ import android.content.Context
 import com.google.gson.GsonBuilder
 import com.shannan.azureair.AndroidApplication
 import com.shannan.azureair.BuildConfig
+import com.shannan.azureair.data.cache.AirportsCacheRoomImpl
+import com.shannan.azureair.data.cache.UserCacheRoomImpl
 import com.shannan.azureair.data.entity.Names
+import com.shannan.azureair.data.remote.airports.LufthansaAirportsImpl
+import com.shannan.azureair.data.remote.auth.LufthansaUsersImpl
 import com.shannan.azureair.data.utils.NamesClassJsonDeserializer
 import com.shannan.azureair.data.utils.ScheduleJsonDeserializer
 import com.shannan.azureair.data.utils.ScheduleResourceJsonDeserializer
@@ -13,6 +17,10 @@ import com.shannan.azureair.data.utils.TerminalClassDeserializer
 import com.shannan.azureair.domain.interactor.models.Schedule
 import com.shannan.azureair.domain.interactor.models.ScheduleResource
 import com.shannan.azureair.domain.interactor.models.Terminal
+import com.shannan.azureair.domain.repository.AirportCache
+import com.shannan.azureair.domain.repository.AirportsRepository
+import com.shannan.azureair.domain.repository.UserCache
+import com.shannan.azureair.domain.repository.UsersRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -55,4 +63,21 @@ class ApplicationModule(private val application: AndroidApplication) {
         }
         return okHttpClientBuilder.build()
     }
+
+    @Provides
+    @Singleton
+    fun providesUserRepository(usersRepository: LufthansaUsersImpl): UsersRepository = usersRepository
+
+    @Provides
+    @Singleton
+    fun providesUserCache(userCache: UserCacheRoomImpl): UserCache = userCache
+
+    @Provides
+    @Singleton
+    fun providesAirportsRepository(repositoryAirports: LufthansaAirportsImpl): AirportsRepository = repositoryAirports
+
+    @Provides
+    @Singleton
+    fun providesAirportsCache(airportCache: AirportsCacheRoomImpl): AirportCache = airportCache
+
 }

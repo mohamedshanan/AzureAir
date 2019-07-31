@@ -1,8 +1,8 @@
-package com.shannan.azureair.data.remote
+package com.shannan.azureair.data.remote.airports
 
 import com.shannan.azureair.data.entity.AirportsResponse
-import com.shannan.azureair.data.remote.LufthansaApi.Companion.BEARER
-import com.shannan.azureair.data.remote.LufthansaApi.Companion.DEFAULT_LANG
+import com.shannan.azureair.data.remote.airports.LufthansaAirportsApi.Companion.BEARER
+import com.shannan.azureair.data.remote.airports.LufthansaAirportsApi.Companion.DEFAULT_LANG
 import com.shannan.azureair.data.utils.NetworkHandler
 import com.shannan.azureair.domain.exception.Failure
 import com.shannan.azureair.domain.exception.GetAirportsFailure
@@ -11,10 +11,11 @@ import com.shannan.azureair.domain.interactor.models.Airport
 import com.shannan.azureair.domain.repository.AirportsRepository
 import retrofit2.Call
 import javax.inject.Inject
+import com.shannan.azureair.data.entity.Airport as AirportEntity
 
-class AirportsLufthansaImpl
+class LufthansaAirportsImpl
 @Inject constructor(private val networkHandler: NetworkHandler,
-                    private val service: LufthansaService) : AirportsRepository {
+                    private val service: LufthansaAirportsService) : AirportsRepository {
 
     companion object {
         private const val LIMIT = 100
@@ -57,8 +58,7 @@ class AirportsLufthansaImpl
                 }
             }
         } catch (exception: Throwable) {
-            Either.Left(GetAirportsFailure())
+            Either.Left(GetAirportsFailure)
         }
     }
-
 }

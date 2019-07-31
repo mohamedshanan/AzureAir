@@ -11,7 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner
  *
  * @see AndroidTest
  */
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(MockitoJUnitRunner.Silent::class)
 abstract class UnitTest {
 
     @Suppress("LeakingThis")

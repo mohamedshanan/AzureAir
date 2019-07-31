@@ -14,7 +14,11 @@ import com.shannan.azureair.domain.interactor.models.Position as DomainPosition
 
 data class AirportsResponse(
         @SerializedName("AirportResource") val airportResource: AirportResource
-)
+) {
+    companion object {
+        fun empty() = AirportsResponse(AirportResource(Airports(emptyList()), Meta(0)))
+    }
+}
 
 data class AirportResource(
         @SerializedName("Airports") val airports: Airports,

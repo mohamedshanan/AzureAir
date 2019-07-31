@@ -208,22 +208,21 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    internal fun showProgressDialog(@StringRes title: Int, @StringRes message: Int) {
-        if (isAdded && !activity!!.isFinishing && progressDialog != null) {
+    internal fun showProgressDialog(@StringRes message: Int) {
+        if (isAdded && !activity!!.isFinishing) {
             progressDialog.setMessage(getString(message))
             progressDialog.show()
         }
     }
 
     internal fun hideProgressDialog() {
-
         if (isAdded && !activity?.isFinishing!! && isProgressDialogShowing()) {
             progressDialog.dismiss()
         }
     }
 
     private fun isProgressDialogShowing(): Boolean {
-        return progressDialog != null && progressDialog.isShowing
+        return progressDialog.isShowing
     }
 
 }

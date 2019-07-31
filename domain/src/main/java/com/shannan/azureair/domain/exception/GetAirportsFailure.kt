@@ -1,3 +1,3 @@
 package com.shannan.azureair.domain.exception
 
-class GetAirportsFailure : Failure.FeatureFailure()
+object GetAirportsFailure : Failure.FeatureFailure()

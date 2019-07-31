@@ -1,17 +1,14 @@
-package com.shannan.azureair.data.remote
+package com.shannan.azureair.data.remote.airports
 
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LufthansaService
-@Inject constructor(retrofit: Retrofit) : LufthansaApi {
+class LufthansaAirportsService
+@Inject constructor(retrofit: Retrofit) : LufthansaAirportsApi {
 
-    private val lufthansaApi by lazy { retrofit.create(LufthansaApi::class.java) }
-
-    override fun authenticate(clientId: String, clientSecret: String, grantType: String) =
-            lufthansaApi.authenticate(clientId, clientSecret, grantType)
+    private val lufthansaApi by lazy { retrofit.create(LufthansaAirportsApi::class.java) }
 
     override fun getAirports(token: String, offset: Int, limit: Int, lang: String) =
             lufthansaApi.getAirports(token, offset, limit, lang)

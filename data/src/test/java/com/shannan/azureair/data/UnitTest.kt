@@ -9,7 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner
  * framework dependencies or components.
  *
  */
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(MockitoJUnitRunner.Silent::class)
 abstract class UnitTest {
 
     @Suppress("LeakingThis")
