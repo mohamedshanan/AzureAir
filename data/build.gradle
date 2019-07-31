@@ -30,6 +30,7 @@ dependencies {
     implementation project(path: ':domain')
     def applicationDependencies = rootProject.ext.mainApplication
     def unitTestDependencies = rootProject.ext.unitTesting
+    def acceptanceTesting = rootProject.ext.acceptanceTesting
 
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.kotlin
@@ -37,8 +38,16 @@ dependencies {
     testImplementation unitTestDependencies.robolectric
     testImplementation unitTestDependencies.junit
     testImplementation unitTestDependencies.mockito
+    testImplementation unitTestDependencies.mockitoInline
     testImplementation unitTestDependencies.kluent
     testImplementation unitTestDependencies.nhaarman
+
+    // acceptance Testing dependencies
+    testImplementation acceptanceTesting.testRunner
+    testImplementation acceptanceTesting.testRules
+    testImplementation acceptanceTesting.espressoCore
+    testImplementation acceptanceTesting.espressoIntents
+    testImplementation acceptanceTesting.androidAnnotations
 
     implementation applicationDependencies.kotlin
     implementation applicationDependencies.kotlinCoroutines
