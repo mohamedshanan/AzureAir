@@ -1,7 +1,6 @@
 package com.shannan.azureair.data.remote.auth
 
 import com.shannan.azureair.data.entity.UserEntity
-import com.shannan.azureair.data.remote.auth.LufthansaAuthApi.Companion.PARAM_GRANT_TYPE
 import com.shannan.azureair.data.utils.NetworkHandler
 import com.shannan.azureair.domain.exception.AuthenticationFailure
 import com.shannan.azureair.domain.exception.Failure
@@ -15,9 +14,9 @@ class LufthansaUsersImpl
 @Inject constructor(private val networkHandler: NetworkHandler,
                     private val service: LufthansaAuthService) : UsersRepository {
 
-    override fun authenticate(clientId: String, clientSecret: String): Either<Failure, User> {
+    override fun authenticate(clientId: String, clientSecret: String, grantType: String): Either<Failure, User> {
         return when (networkHandler.isConnected) {
-            true -> request(service.authenticate(clientId, clientSecret, PARAM_GRANT_TYPE), { it.toDomainUser() }, UserEntity.empty())
+            true -> request(service.authenticate(clientId, clientSecret, grantType), { it.toDomainUser() }, UserEntity.empty())
             false, null -> Either.Left(Failure.NetworkConnection)
         }
     }

@@ -54,6 +54,11 @@ android {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+
+    buildTypes.each {
+      it.buildConfigField "String", "LH_CLIENT_ID", '"wptpzdkwe7s22bqaj4kvqc4v"'
+      it.buildConfigField "String", "LH_CLIENT_SECRET", '"Teuk3a4bF9"'
+    }
   }
 
   sourceSets {
@@ -62,6 +67,10 @@ android {
     test.java.srcDirs += 'src/test/kotlin'
     androidTest.java.srcDirs += 'src/androidTest/kotlin'
   }
+
+//  dataBinding {
+//    enabled = true
+//  }
 }
 
 dependencies {

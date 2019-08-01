@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.shannan.azureair.core.platform.BaseActivity
 import com.shannan.azureair.core.platform.BaseFragment
-import com.shannan.azureair.core.platform.DialogHelper
 import kotlinx.android.synthetic.main.activity_layout.*
 
 inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) =
@@ -29,11 +28,6 @@ fun BaseFragment.close() = fragmentManager?.popBackStack()
 val BaseFragment.viewContainer: View get() = (activity as BaseActivity).fragmentContainer
 
 val BaseFragment.appContext: Context get() = activity?.applicationContext!!
-
-inline fun Fragment.showAlertDialog(func: DialogHelper.() -> Unit): AlertDialog =
-        DialogHelper(this.context!!).apply {
-            func()
-        }.create()
 
 inline fun Fragment.showConfirmationDialog(title: String, message: String, positiveText: String, negativeText: String,
                                            crossinline positiveClickListener: () -> Unit,

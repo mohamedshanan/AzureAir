@@ -5,5 +5,5 @@ import com.shannan.azureair.domain.functional.Either
 import com.shannan.azureair.domain.interactor.models.User
 
 interface UsersRepository {
-    fun authenticate(clientId: String, clientSecret: String): Either<Failure, User>
+    fun authenticate(clientId: String, clientSecret: String, grantType: String): Either<Failure, User>
 }

@@ -186,7 +186,7 @@ abstract class BaseFragment : Fragment() {
     }
 
 
-    internal fun setErrorDialog(message: String, positive: String?, negative: String?, positiveClickListener: () -> Unit, negativeClickListener: () -> Unit) {
+    fun setErrorDialog(message: String, positive: String?, negative: String?, positiveClickListener: () -> Unit, negativeClickListener: () -> Unit) {
         if (isAdded) {
             val errorDialog = AlertDialog.Builder(activity as Context)
             errorDialog.setCancelable(false)

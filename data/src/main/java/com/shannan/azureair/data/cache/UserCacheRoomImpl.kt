@@ -21,6 +21,7 @@ class UserCacheRoomImpl
     }
 
     override suspend fun saveUser(user: User): Either<Failure, User> {
+        user.expiresAt = System.currentTimeMillis() + (user.expires_in.times(1000))
         return when (userDao.insert(UserEntity.empty().fromUser(user))) {
             in Long.MIN_VALUE..0 -> {
                 Either.Left(Failure.ServerError)

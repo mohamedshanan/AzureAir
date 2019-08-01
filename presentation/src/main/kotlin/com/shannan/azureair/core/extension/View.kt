@@ -1,16 +1,14 @@
 
 package com.shannan.azureair.core.extension
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
+import android.content.ContextWrapper
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -62,8 +60,13 @@ private class ImageViewBaseTarget (var imageView: ImageView?, var activity: Frag
     override fun getSize(cb: SizeReadyCallback) = cb.onSizeReady(SIZE_ORIGINAL, SIZE_ORIGINAL)
 }
 
-fun TextView.copyTextToClipBoard() {
-    val clipboardManager: ClipboardManager = context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clip: ClipData = ClipData.newPlainText("asdsdas", text)
-    clipboardManager.primaryClip = clip
+fun View.getParentActivity(): AppCompatActivity? {
+    var context = this.context
+    while (context is ContextWrapper) {
+        if (context is AppCompatActivity) {
+            return context
+        }
+        context = context.baseContext
+    }
+    return null
 }
