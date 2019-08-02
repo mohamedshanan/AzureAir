@@ -8,16 +8,14 @@ import com.shannan.azureair.AndroidApplication
 import com.shannan.azureair.BuildConfig
 import com.shannan.azureair.data.cache.AirportsCacheRoomImpl
 import com.shannan.azureair.data.cache.UserCacheRoomImpl
+import com.shannan.azureair.data.entity.Airport
 import com.shannan.azureair.data.entity.Names
 import com.shannan.azureair.data.remote.airports.LufthansaAirportsImpl
 import com.shannan.azureair.data.remote.auth.LufthansaUsersImpl
 import com.shannan.azureair.data.roomdb.AirportDao
 import com.shannan.azureair.data.roomdb.AzureAirDatabase
 import com.shannan.azureair.data.roomdb.UserDao
-import com.shannan.azureair.data.utils.NamesClassJsonDeserializer
-import com.shannan.azureair.data.utils.ScheduleJsonDeserializer
-import com.shannan.azureair.data.utils.ScheduleResourceJsonDeserializer
-import com.shannan.azureair.data.utils.TerminalClassDeserializer
+import com.shannan.azureair.data.utils.*
 import com.shannan.azureair.domain.interactor.models.Schedule
 import com.shannan.azureair.domain.interactor.models.ScheduleResource
 import com.shannan.azureair.domain.interactor.models.Terminal
@@ -45,6 +43,7 @@ class ApplicationModule(private val application: AndroidApplication) {
     @Singleton
     fun providesRetrofit(): Retrofit {
         val gson = GsonBuilder()
+                .registerTypeAdapter(Airport::class.java, AirportJsonDeserializer())
                 .registerTypeAdapter(Names::class.java, NamesClassJsonDeserializer())
                 .registerTypeAdapter(ScheduleResource::class.java, ScheduleResourceJsonDeserializer())
                 .registerTypeAdapter(Schedule::class.java, ScheduleJsonDeserializer())
